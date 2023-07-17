@@ -1,0 +1,73 @@
+<%- include('../partials/header') %>
+
+  <section id="show-page">
+    <div class="margin-top-10">Name: <%= goal.Name %></div>
+    <div class="margin-top-10">Date: <%= goal.Date %></div>
+    <div class="margin-top-10">Category Type: <%= goal.Category %></div>
+    <div class="margin-top-10">How Many Days: <%= goal.HowManyDays %></div>
+  </section> 
+
+  <% if (user) { %>
+    <form id="add-update-form" method="POST" action="/goals/<%= goal._id %>/updates" class="text-align-center">
+      <div class="div-display margin-top-10">
+        <label>Update Goals:</label>
+        <textarea name="Content" class="text-area-height"></textarea>
+      </div>
+      <div class="margin-top-10">
+        <input type="submit" value="Add Update">
+      </div>
+    </form>
+    <% } else { %>
+      <p>Please Login to leave a update</p>
+    <% } %>
+  </form>
+
+   <!-- // Create a list of updates  -->
+   <% if (goal.updates.length) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Date</th>
+          <th>Update</th>
+          <th>Delete</th>
+      
+        </tr>
+      </thead>
+      <tbody>
+        <% goal.updates.forEach(function(r) { %>
+          <tr>
+            <td class="update-user"><img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer" ><%= r.userName %></td>
+            <td><%= r.createdAt.toLocaleDateString() %></td>
+            <!-- <td>
+              <%= r.createdAt.toLocaleDateString() %>
+            </td> -->
+            <td>
+              <%= r.Content %>
+            </td>
+          
+            <td>
+              <% if (user && user._id.equals(r.user)) { %>
+                <form action="/updates/<%= r._id %>?_method=DELETE" method="POST">
+                  <button type="submit">X</button>
+                </form>
+                
+              <% } %>
+            </td>
+            <td>
+              <form action="/updates/<%= r._id %>?_method=PUT" method="POST">
+                <!-- Value attribute is being set to the comment's current text -->
+                <input name="Content" value="<%= r.Content %>">
+                <button type="submit">Edit Update</button>
+              </form>
+            </td>
+          </tr>
+          <% }); %>
+      </tbody>
+    </table>
+    <% } else { %>
+      <h5 class="text-align-center ">No updates Yet</h5>
+      <% } %>
+  
+
+  <%- include('../partials/footer') %>

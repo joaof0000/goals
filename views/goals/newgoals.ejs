@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+<h1 class="text-align-center">Goal List</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Goal</th>
+      <th>Date</th>
+      <th>Category</th>
+      <th>How Many Days</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Write the line of EJS to iterate over salon using forEach -->
+    <% goals.forEach(function(goal) { %>
+    <tr>
+      <td><%= goal.Name %></td>
+      <td><%= goal.Date %></td>
+      <td><%= goal.Category %></td>
+      <td><%= goal.HowManyDays %></td>
+
+      <td><a href="/goals/<%= goal._id %>">DETAILS</a></td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>

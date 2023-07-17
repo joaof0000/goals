@@ -2,22 +2,15 @@ const mongoose = require('mongoose');
 
 // Create your User Model
 const UserSchema = new mongoose.Schema({
-        name: String,
-        googleId: {
+    name: String,
+    googleId: {
         type: String,
-        required: true,
-        },
-        email: String,
-        avatar: String,
+        required: true
+    },
+    email: String,
+    avatar: String
 }, {
-    timestamps: true,
+    timestamps: true
 });
 
-
 module.exports = mongoose.model('User', UserSchema);
-
-
-
-
-
-

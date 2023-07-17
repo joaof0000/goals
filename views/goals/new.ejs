@@ -1,0 +1,50 @@
+<%- include('../partials/header') %>
+
+<h1 class="text-align-center">Create Your Goal</h1>
+<form action="/goals" method="POST" class="text-align-center">
+  <div class="margin-top-10">
+    <label>Goal: <input type="text" name="Name" class="margin-top" /></label>
+  </div>
+ 
+  <!-- Get today's date -->
+<%
+const currentDate = new Date();
+const formattedDate = currentDate.toDateString();
+%>
+
+<!-- Display the date -->
+<div class="margin-top-10">
+<label>Today's Date: <%= formattedDate %></label>
+</div>
+
+  <div class="margin-top-10">
+    <label
+      >Category:
+      <select name="Category">
+        <option value="Financial">Financial</option>
+        <option value="Spiritual">Spiritual</option>
+        <option value="Physical">Physical</option>
+        <option value="Family">Family</option>
+        <option value="Lover">Lover</option>
+        <option value="Career">Career</option>
+      </select>
+    </label>
+  </div>
+  <div class="margin-top-10">
+    <label>Why you want the goal: 
+      <textarea name="goalReason" rows="4" cols="50" placeholder="Enter your reason here..."></textarea>
+    </label>
+  </div>
+  <div class="margin-top-10">
+    <label for="HowManyDays">How Many Days or Months (include day or month):</label>
+    <input type="text" id="HowManyDays" name="HowManyDays" pattern="[A-Za-z0-9]+" required>
+  </div>
+  
+  <div class="margin-top-10">
+    <input type="submit" value="Add Goal" />
+  </div>
+  <div class="margin-top-10">
+    <p><%= errorMsg %></p>
+  </div>
+  <%- include('../partials/footer') %>
+</form>
